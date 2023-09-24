@@ -4,7 +4,7 @@ import Job from "../Job/Job";
 
 const FeaturedJobs = () => {
 
-
+            
     const [jobs,setjobs] = useState([]);
 
     const [dataLength , setDataLength] =useState(4)
@@ -21,13 +21,16 @@ const FeaturedJobs = () => {
     return (
         <div>
             <div className="text-center">
-                <h2 className="text-5xl">Featured Jobs</h2>
+                <h2 className="text-5xl">Featured Jobs:{jobs.length}</h2>
                 <p>Explore thousands of job opportunities with all the information you need. Its your future</p>
             </div>
             <div className="grid grid-cols-2 gap-6">
                 {
-                    jobs.map(job => <Job key={job.id} job={job}></Job>)
+                    jobs.slice(0,dataLength).map(job => <Job key={job.id} job={job}></Job>)
                 }
+            </div>
+            <div className={dataLength===jobs.length && 'hidden'}>
+                <button onClick={()=> setDataLength()} className="btn btn-primary">Show All</button>
             </div>
         </div>
     );
